@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { useLogin } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
-import { useUserContext } from "../../contexts/UserContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import Loading from "../loading/Loading";
+
+import { useUserContext } from "../../contexts/UserContext";
+import { useLogin } from "../../hooks/useAuth";
 
 export default function Login() {
     const login = useLogin();
@@ -49,17 +52,21 @@ export default function Login() {
                         />
                     </div>
 
-                    <div className="flex flex-col gap-1">
+                    <div className="relative flex flex-col gap-1">
                         <label htmlFor="password">Password</label>
                         <input
                             className="border-1 border-gray-400 rounded-md px-4 py-2"
                             placeholder="**********"
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             id="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
                         />
+                        <span
+                            className="absolute right-3 top-[38px] cursor-pointer text-gray-500 text-2xl"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                        >{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
                     </div>
                     <button className="bg-blue-400 w-full px-4 py-2 rounded-md text-white hover:bg-blue-500 transition duration-500 ease-in-out" disabled={loading ? true : false}>{loading ? 'Wait...' : 'Login'}</button>
                     <p>You don't have an account? <Link to={'/register'} className="text-blue-400 font-bold ml-1">Register here</Link></p>
