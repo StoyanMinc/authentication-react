@@ -2,7 +2,6 @@ import User from "../models/User.js";
 import { verifyToken } from "../utils/token.js";
 
 export const protect = async (req, res, next) => {
-    console.log(req.cookies.token)
     try {
         const token = req.cookies.token;
         if (!token) {

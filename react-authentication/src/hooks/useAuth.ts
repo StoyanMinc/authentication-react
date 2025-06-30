@@ -5,8 +5,47 @@ const BASE_URL = import.meta.env.VITE_SERVER_URL;
 import { useUserContext } from '../contexts/UserContext';
 
 
-export const useRegister = async () => {
+export const useRegister = () => {
+    const { setLoading } = useUserContext();
+    const register = async (email: string, username: string, password: string, repass: string) => {
+        if (!email || !username || !password || !repass) {
+            return toast.error('All fields are required!');
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            toast.error('Please enter a valid email address.');
+            return
+        }
+        if (password !== repass) {
+            return toast.error('Passwords don\'t match!');
+        }
+        setLoading(true)
+        try {
+            await axios.post(`${BASE_URL}/api/user/register`, {
+                email: email,
+                username: username,
+                password: password
+            }, { withCredentials: true });
 
+            await axios.post(`${BASE_URL}/api/user/verify-email`, {}, { withCredentials: true });
+            toast('Check your email for verifying your account', {
+                icon: '❗',
+                style: {
+                    border: '1px solid orange',
+                    padding: '16px',
+                    color: 'orange',
+                },
+                duration: 4000,
+            });
+        } catch (error: any) {
+            console.log('Error login user:', error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return register;
 }
 
 export const useLogin = () => {
@@ -27,13 +66,11 @@ export const useLogin = () => {
             const response = await axios.post(`${BASE_URL}/api/user/login`, {
                 email: email,
                 password: password
-            }, {
-                withCredentials: true
-            });
+            }, { withCredentials: true });
 
             if (!response.data.isVerified) {
                 await axios.post(`${BASE_URL}/api/user/verify-email`, {}, { withCredentials: true });
-                toast('Check your email for verifying your account', {
+                return toast('Check your email for verifying your account', {
                     icon: '❗',
                     style: {
                         border: '1px solid orange',
@@ -42,7 +79,7 @@ export const useLogin = () => {
                     },
                     duration: 4000,
                 });
-                return;
+
             };
 
             toast.success('Login successfully!');

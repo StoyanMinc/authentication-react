@@ -7,6 +7,7 @@ import Loading from "../loading/Loading";
 export default function Login() {
     const login = useLogin();
     const { loading } = useUserContext();
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [formData, setFormData] = useState({
         email: '',
         password: ''
