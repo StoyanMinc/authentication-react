@@ -27,7 +27,6 @@ export default function Login() {
         e.preventDefault();
         const response = await login(formData.email, formData.password);
         if (!response) return
-
     };
 
     return (
@@ -70,6 +69,7 @@ export default function Login() {
                     </div>
                     <button className="bg-blue-400 w-full px-4 py-2 rounded-md text-white hover:bg-blue-500 transition duration-500 ease-in-out" disabled={loading ? true : false}>{loading ? 'Wait...' : 'Login'}</button>
                     <p>You don't have an account? <Link to={'/register'} className="text-blue-400 font-bold ml-1">Register here</Link></p>
+                    <Link to={'/forgot-password'} className="text-blue-400 self-center hover:underline">Forgot password ?</Link>
                 </form>
             </div>
         </>

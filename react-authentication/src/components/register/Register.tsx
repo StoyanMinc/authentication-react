@@ -29,7 +29,6 @@ export default function Register() {
         e.preventDefault();
         const response = await register(formData.email, formData.username, formData.password, formData.repass);
         if (!response) return
-
     };
 
     return (
@@ -102,6 +101,5 @@ export default function Register() {
                 </form>
             </div>
         </>
-
     );
 }

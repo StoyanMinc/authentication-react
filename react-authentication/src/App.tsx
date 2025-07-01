@@ -6,6 +6,9 @@ import Register from './components/register/Register';
 import Home from './components/home/Home';
 import ProtectedLayout from './components/protectedLayout/ProtectedLayout';
 import VerifyEmail from './components/verifyEmail/VerifyEmail';
+import ForgotPassword from './components/forgot-password/ForgotPassword';
+import ResetPassword from './components/resetPassword/ResetPassword';
+import ChangePassword from './components/change-password/ChangePassword';
 
 function App() {
 
@@ -15,10 +18,15 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path='verify-email/:token' element={<VerifyEmail />} />
+                <Route path='/verify-email/:token' element={<VerifyEmail />} />
+                <Route path='/forgot-password' element={<ForgotPassword />} />
+                <Route path='/reset-password/:token' element={<ResetPassword />} />
+
                 <Route element={<ProtectedLayout />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/change-password' element={<ChangePassword />} />
                 </Route>
+
             </Routes>
         </div>
     )

@@ -311,7 +311,7 @@ export const changePassword = async (req, res) => {
 
         const isPasswordValid = await bcrypt.compare(currentPassword, existUser.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Invalid password!' });
+            return res.status(401).json({ message: 'Invalid current password!' });
         };
 
         existUser.password = newPassword;
