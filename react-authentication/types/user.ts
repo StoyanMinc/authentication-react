@@ -6,6 +6,7 @@ export interface User {
     bio: string;
     role: string;
     isVerified: boolean;
+    createdAt: string
 }
 
 export interface UpdateUser {

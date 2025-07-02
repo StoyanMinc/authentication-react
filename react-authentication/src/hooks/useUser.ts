@@ -92,6 +92,7 @@ export const useLogin = () => {
                 isVerified: response.data.isVerified,
                 role: response.data.role,
                 bio: response.data.bio,
+                createdAt: response.data.createdAt
             });
             navigate('/');
         } catch (error: any) {
@@ -287,4 +288,21 @@ export const useGetUsers = () => {
 
     }
     return getUsers
+}
+
+export const useDeleteUser = () => {
+    const { setLoading } = useUserContext();
+    const deleteUser = async (id: string) => {
+        setLoading(true)
+        try {
+            const response = await axios.delete(`${BASE_URL}/api/admin/delete-user/${id}`, { withCredentials: true });
+            return response.data
+        } catch (error: any) {
+            console.log('Error deleting user:', error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false)
+        }
+    }
+    return deleteUser;
 }
