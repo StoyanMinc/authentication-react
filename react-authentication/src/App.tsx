@@ -9,6 +9,9 @@ import VerifyEmail from './components/verifyEmail/VerifyEmail';
 import ForgotPassword from './components/forgot-password/ForgotPassword';
 import ResetPassword from './components/resetPassword/ResetPassword';
 import ChangePassword from './components/change-password/ChangePassword';
+import UpdateUser from './components/update-user/UpdateUser';
+import AdminPanel from './components/admin-panel/AdminPanel';
+import AdminProtectedLayout from './components/protectedLayout/AdminProtectedLayout';
 
 function App() {
 
@@ -25,6 +28,11 @@ function App() {
                 <Route element={<ProtectedLayout />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/change-password' element={<ChangePassword />} />
+                    <Route path='/update-user' element={<UpdateUser />} />
+                </Route>
+
+                <Route element={<AdminProtectedLayout />}>
+                    <Route path='/admin-panel' element={<AdminPanel />} />
                 </Route>
 
             </Routes>

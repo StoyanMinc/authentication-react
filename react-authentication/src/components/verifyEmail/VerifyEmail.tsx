@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useVerifyEmail } from "../../hooks/useAuth";
+import { useVerifyEmail } from "../../hooks/useUser";
 import toast from 'react-hot-toast'
 
 

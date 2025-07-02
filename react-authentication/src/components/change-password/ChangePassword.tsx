@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useUserContext } from "../../contexts/UserContext";
-import { useChangePassword } from "../../hooks/useAuth";
+import { useChangePassword } from "../../hooks/useUser";
 
 export default function ChangePassword() {
     const { loading } = useUserContext();

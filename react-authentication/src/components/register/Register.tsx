@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loading from "../loading/Loading";
 
 import { useUserContext } from "../../contexts/UserContext";
-import { useRegister } from "../../hooks/useAuth";
+import { useRegister } from "../../hooks/useUser";
 
 export default function Register() {
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useUserContext } from "../../contexts/UserContext";
-import { useForgotPassword } from "../../hooks/useAuth";
+import { useForgotPassword } from "../../hooks/useUser";
 
 export default function ForgotPassword() {
     const { loading } = useUserContext();

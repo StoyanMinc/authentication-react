@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useUserContext } from "../../contexts/UserContext";
-import { useResetPassword } from "../../hooks/useAuth";
+import { useResetPassword } from "../../hooks/useUser";
 
 export default function ResetPassword() {
     const { token } = useParams();

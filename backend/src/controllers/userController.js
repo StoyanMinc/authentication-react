@@ -111,8 +111,8 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const { username, bio, photo } = req.body;
-        const updatedUser = await User.findByIdAndUpdate(req.user._id, { username, bio, photo }, { new: true }).select('-password');
+        const { username, bio } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, { username, bio }, { new: true }).select('-password');
 
         if (!updatedUser) {
             return res.status(404).json({ message: 'User not found!' });

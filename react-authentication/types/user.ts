@@ -7,3 +7,8 @@ export interface User {
     role: string;
     isVerified: boolean;
 }
+
+export interface UpdateUser {
+    username: string;
+    bio: string;
+}

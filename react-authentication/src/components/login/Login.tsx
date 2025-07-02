@@ -5,7 +5,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loading from "../loading/Loading";
 
 import { useUserContext } from "../../contexts/UserContext";
-import { useLogin } from "../../hooks/useAuth";
+import { useLogin } from "../../hooks/useUser";
 
 export default function Login() {
     const login = useLogin();

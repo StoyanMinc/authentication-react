@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 const BASE_URL = import.meta.env.VITE_SERVER_URL;
 import { useUserContext } from '../contexts/UserContext';
-
+import type { UpdateUser } from '../../types/user';
 
 export const useRegister = () => {
     const { setLoading } = useUserContext();
@@ -103,6 +103,16 @@ export const useLogin = () => {
 
     }
     return login
+}
+
+export const useLogout = () => {
+    const navigate = useNavigate();
+    const logout = async () => {
+        await axios.get(`${BASE_URL}/api/user/logout`, { withCredentials: true });
+        localStorage.removeItem('user');
+        navigate('/login');
+    }
+    return logout
 }
 
 export const useVerifyEmail = () => {
@@ -218,4 +228,63 @@ export const useChangePassword = () => {
     }
 
     return changePassword;
+}
+
+export const useGetUser = () => {
+    const { setLoading } = useUserContext();
+    const getUser = async () => {
+        setLoading(true)
+        try {
+            const response = await axios.get(`${BASE_URL}/api/user/get-user`, { withCredentials: true });
+            return response.data
+        } catch (error: any) {
+            console.log('Error fetching user:', error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false)
+        }
+
+    }
+    return getUser
+}
+
+export const useUpdateUser = () => {
+    const navigate = useNavigate();
+    const { setLoading } = useUserContext();
+
+    const updateUser = async (userData: UpdateUser) => {
+        setLoading(true)
+        try {
+            const response = await axios.put(`${BASE_URL}/api/user/update-user`,
+                { username: userData.username, bio: userData.bio },
+                { withCredentials: true });
+            toast.success('Successfully update user!');
+            navigate('/');
+            return response.data
+        } catch (error: any) {
+            console.log('Error fetching user:', error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false)
+        }
+    }
+    return updateUser;
+}
+
+export const useGetUsers = () => {
+    const { setLoading } = useUserContext();
+    const getUsers = async () => {
+        setLoading(true)
+        try {
+            const response = await axios.get(`${BASE_URL}/api/admin/get-users`, { withCredentials: true });
+            return response.data
+        } catch (error: any) {
+            console.log('Error fetching user:', error);
+            toast.error(error.response.data.message);
+        } finally {
+            setLoading(false)
+        }
+
+    }
+    return getUsers
 }
